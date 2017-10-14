@@ -1,0 +1,23 @@
+{
+  "name": "quick-redux",
+  "version": "0.0.1",
+  "description": "quick-redux simplifies redux wiring",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robbymurphy/quick-redux.git"
+  },
+  "keywords": [
+    "redux",
+    "react"
+  ],
+  "author": "Robert Murphy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robbymurphy/quick-redux/issues"
+  },
+  "homepage": "https://github.com/robbymurphy/quick-redux#readme"
+}
