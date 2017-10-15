@@ -4,17 +4,22 @@
   "description": "helpers for redux wiring",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --config webpack.prod.config.js",
+    "build:prod": "./node_modules/.bin/webpack --config webpack.prod.config.js",
     "build:dev": "./node_modules/.bin/webpack --config webpack.config.js",
-    "test": "jest",
+    "build": "npm run build:prod && npm run test",
+    "test": "jest --coverage",
     "test:watch": "jest --watchAll",
-    "test:coverage": "jest --coverage"
+    "start": "build test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robbymurphy/redux-jive.git"
   },
-  "keywords": ["redux", "react", "flux"],
+  "keywords": [
+    "redux",
+    "react",
+    "flux"
+  ],
   "author": "Robert Murphy",
   "license": "MIT",
   "bugs": {
