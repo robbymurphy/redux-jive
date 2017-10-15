@@ -1,6 +1,6 @@
 class Reducer {
   constructor(defaultValue) {
-    if (!defaultValue) {
+    if (defaultValue === undefined) {
       throw new Error('defaultValue must not be undefined');
     }
     this.reducers = [];
@@ -9,7 +9,6 @@ class Reducer {
 
   reduce(actionFn, reducerFn) {
     this.reducers.push({
-      // eslint-disable-next-line no-underscore-dangle
       actionType: actionFn.__jiveId,
       reducerFn,
     });
