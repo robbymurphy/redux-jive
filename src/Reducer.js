@@ -1,5 +1,8 @@
 class Reducer {
   constructor(defaultValue) {
+    if (!defaultValue) {
+      throw new Error('defaultValue must not be undefined');
+    }
     this.reducers = [];
     this.defaultValue = defaultValue;
   }
