@@ -31,7 +31,7 @@ class TestReducer extends Reducer {
     return `${payload}_new2`;
   }
 }
-/* eslint-disable class-methods-use-this */
+/* eslint-enable class-methods-use-this, no-useless-constructor  */
 
 describe('Reducer', () => {
   it('throws an exception when no default value given', () => {

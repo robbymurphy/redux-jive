@@ -1,15 +1,15 @@
 import Actions from './Actions';
 
+/* eslint-disable class-methods-use-this */
 class TestActions extends Actions {
-  // eslint-disable-next-line class-methods-use-this
   action1() {
     return 'test';
   }
-  // eslint-disable-next-line class-methods-use-this
   action2() {
     return 'test2';
   }
 }
+/* eslint-enable class-methods-use-this */
 
 describe('Actions', () => {
   it('assigns an id to all methods', () => {
