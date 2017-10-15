@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'quick-redux': path.resolve(__dirname, 'src/index.js'),
+    'redux-jive': path.resolve(__dirname, 'src/index.js'),
     vendor: 'redux',
   },
   target: 'web',

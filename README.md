@@ -1,2 +1,2 @@
-# quick-redux
-Quick Redux simplifies Redux wiring
+# redux-jive
+helpers for redux wiring

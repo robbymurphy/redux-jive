@@ -41,7 +41,7 @@ function wrapAction(obj, actionName) {
   });
 
   // eslint-disable-next-line no-underscore-dangle
-  action.__quickId = actionId;
+  action.__jiveId = actionId;
   // eslint-disable-next-line no-param-reassign
   obj[actionName] = action;
 }

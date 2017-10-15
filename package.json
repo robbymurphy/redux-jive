@@ -1,7 +1,7 @@
 {
-  "name": "quick-redux",
+  "name": "redux-jive",
   "version": "0.0.1",
-  "description": "quick-redux simplifies redux wiring",
+  "description": "helpers for redux wiring",
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --config webpack.prod.config.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robbymurphy/quick-redux.git"
+    "url": "git+https://github.com/robbymurphy/redux-jive.git"
   },
-  "keywords": ["redux", "react"],
+  "keywords": ["redux", "react", "flux"],
   "author": "Robert Murphy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/robbymurphy/quick-redux/issues"
+    "url": "https://github.com/robbymurphy/redux-jive/issues"
   },
-  "homepage": "https://github.com/robbymurphy/quick-redux#readme",
+  "homepage": "https://github.com/robbymurphy/redux-jive#readme",
   "dependencies": {
     "redux": "^3.7.2"
   },

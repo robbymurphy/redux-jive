@@ -7,7 +7,7 @@ class Reducer {
   reduce(actionFn, reducerFn) {
     this.reducers.push({
       // eslint-disable-next-line no-underscore-dangle
-      actionType: actionFn.__quickId,
+      actionType: actionFn.__jiveId,
       reducerFn,
     });
   }
