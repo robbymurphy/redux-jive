@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Jest",
+      "type": "node",
+      "request": "launch",
+      "env": { "NODE_ENV": "test" },
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest",
+      "stopOnEntry": false,
+      "args": ["-i", "--watch"],
+      "runtimeArgs": ["--nolazy"],
+      "console": "internalConsole",
+      "sourceMaps": true,
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
+}
