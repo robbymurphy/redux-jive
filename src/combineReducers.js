@@ -2,6 +2,9 @@ import { combineReducers } from 'redux';
 import Reducer from './Reducer';
 
 export default function (reducers) {
+  if (!reducers) {
+    return {};
+  }
   const reducer = {};
   const objKeys = Object.keys(reducers);
   for (let i = 0; i < objKeys.length; i += 1) {
