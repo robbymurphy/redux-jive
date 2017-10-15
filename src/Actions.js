@@ -25,28 +25,28 @@ function funcIsAction(functionName) {
   return true;
 }
 
+function wrapAction(obj, actionName) {
+  const originalMethod = obj[actionName];
+  const constructorName = Object.getPrototypeOf(obj).constructor.name;
+  const actionId = `${constructorName}.${actionName}`;
+
+  const action = (...args) => ({
+    type: actionId,
+    payload: originalMethod.apply(obj, args),
+  });
+
+  action.__jiveId = actionId;
+  // eslint-disable-next-line no-param-reassign
+  obj[actionName] = action;
+}
+
 class Actions {
   constructor() {
     const actionNames = Actions.getAllActionFunctions(this.constructor.prototype);
     for (let i = 0; i < actionNames.length; i += 1) {
       const actionName = actionNames[i];
-      Actions.wrapAction(this, actionName);
+      wrapAction(this, actionName);
     }
-  }
-
-  static wrapAction(obj, actionName) {
-    const originalMethod = obj[actionName];
-    const constructorName = Object.getPrototypeOf(obj).constructor.name;
-    const actionId = `${constructorName}.${actionName}`;
-
-    const action = (...args) => ({
-      type: actionId,
-      payload: originalMethod.apply(obj, args),
-    });
-
-    action.__jiveId = actionId;
-    // eslint-disable-next-line no-param-reassign
-    obj[actionName] = action;
   }
 
   static getAllActionFunctions(obj) {
