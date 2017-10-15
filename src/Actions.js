@@ -25,34 +25,33 @@ function funcIsAction(functionName) {
   return true;
 }
 
-function getAllActionFunctions(obj) {
-  const allObjProperties = Object.getOwnPropertyNames(obj.constructor.prototype);
-  return allObjProperties.filter(name => typeof obj[name] === 'function' && funcIsAction(name));
-}
-
-function wrapAction(obj, actionName) {
-  const originalMethod = obj[actionName];
-  const constructorName = Object.getPrototypeOf(obj).constructor.name;
-  const actionId = `${constructorName}.${actionName}`;
-
-  const action = (...args) => ({
-    type: actionId,
-    payload: originalMethod.apply(obj, args),
-  });
-
-  // eslint-disable-next-line no-underscore-dangle
-  action.__jiveId = actionId;
-  // eslint-disable-next-line no-param-reassign
-  obj[actionName] = action;
-}
-
 class Actions {
   constructor() {
-    const actionNames = getAllActionFunctions(this.constructor.prototype);
+    const actionNames = Actions.getAllActionFunctions(this.constructor.prototype);
     for (let i = 0; i < actionNames.length; i += 1) {
       const actionName = actionNames[i];
-      wrapAction(this, actionName);
+      Actions.wrapAction(this, actionName);
     }
+  }
+
+  static wrapAction(obj, actionName) {
+    const originalMethod = obj[actionName];
+    const constructorName = Object.getPrototypeOf(obj).constructor.name;
+    const actionId = `${constructorName}.${actionName}`;
+
+    const action = (...args) => ({
+      type: actionId,
+      payload: originalMethod.apply(obj, args),
+    });
+
+    action.__jiveId = actionId;
+    // eslint-disable-next-line no-param-reassign
+    obj[actionName] = action;
+  }
+
+  static getAllActionFunctions(obj) {
+    const allObjProperties = Object.getOwnPropertyNames(obj.constructor.prototype);
+    return allObjProperties.filter(name => typeof obj[name] === 'function' && funcIsAction(name));
   }
 }
 

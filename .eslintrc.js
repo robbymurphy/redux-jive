@@ -4,4 +4,7 @@ module.exports = {
   env: {
     jest: true,
   },
+  rules: {
+    'no-underscore-dangle': 'off',
+  },
 };
