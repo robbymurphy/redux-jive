@@ -26,7 +26,8 @@ function funcIsAction(functionName) {
 }
 
 function getAllActionFunctions(obj) {
-  return Object.getOwnPropertyNames(obj.constructor.prototype).filter(name => typeof obj[name] === 'function' && funcIsAction(name));
+  const allObjProperties = Object.getOwnPropertyNames(obj.constructor.prototype);
+  return allObjProperties.filter(name => typeof obj[name] === 'function' && funcIsAction(name));
 }
 
 function wrapAction(obj, actionName) {
