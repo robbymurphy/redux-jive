@@ -4,9 +4,11 @@
   "description": "helpers for redux wiring",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf dist coverage",
     "build:prod": "./node_modules/.bin/webpack --config webpack.prod.config.js",
     "build:dev": "./node_modules/.bin/webpack --config webpack.config.js",
-    "build": "npm run build:prod && npm run test",
+    "build": "npm run clean && npm run build:prod && npm run test",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "start": "build test"
@@ -35,11 +37,13 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "clean-webpack-plugin": "^0.1.17",
+    "coveralls": "^3.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
     "jest": "^21.2.1",
     "prettier-eslint": "^8.2.1",
+    "rimraf": "^2.6.2",
     "webpack": "^3.7.1"
   }
 }
