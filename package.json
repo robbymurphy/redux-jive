@@ -5,23 +5,18 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist coverage",
-    "build:prod": "./node_modules/.bin/webpack --config webpack.prod.config.js",
-    "build:dev": "./node_modules/.bin/webpack --config webpack.config.js",
+    "build:prod": "webpack --config webpack.prod.config.js",
+    "build:dev": "webpack --config webpack.config.js",
     "build": "npm run clean && npm run build:prod && npm run test",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "test": "jest --coverage",
-    "test:watch": "jest --watchAll",
-    "start": "build test"
+    "test:watch": "npm run build:dev && jest --watchAll"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robbymurphy/redux-jive.git"
   },
-  "keywords": [
-    "redux",
-    "react",
-    "flux"
-  ],
+  "keywords": ["redux", "react", "flux"],
   "author": "Robert Murphy",
   "license": "MIT",
   "bugs": {
