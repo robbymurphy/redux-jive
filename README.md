@@ -50,11 +50,7 @@ export class TodoReducer extends Reducer {
   }
 
   handleMarkDone(state, payload) {
-    return state.map(todo =>
-      (todo.id === payload.id) 
-        ? {...todo, completed: !todo.completed}
-        : todo
-    );
+    return state.map(todo => todo.id === payload.id ? {...todo, done: true} : todo);
   }
 }
 ```
