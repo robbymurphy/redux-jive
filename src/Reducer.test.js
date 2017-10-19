@@ -126,5 +126,19 @@ describe('Reducer', () => {
       // Assert
       expect(newState).toEqual('state');
     });
+    it('allows chaining to create new reducer', () => {
+      // Arrange
+      const reducer = new Reducer('test')
+        .reduce(testActions.action1, (state, payload) => `${payload}_new`)
+        .reduceAsync(testActions.asyncAction, () => {})
+        .build();
+      const action = testActions.action1();
+
+      // Act
+      const newState = reducer({}, action);
+
+      // Assert
+      expect(newState).toEqual('test1_new');
+    });
   });
 });

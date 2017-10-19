@@ -12,6 +12,7 @@ class Reducer {
       actionType: actionFn.__jiveId,
       reducerFn,
     });
+    return this;
   }
 
   reduceAsync(asyncActionFn, reduceBeforeFn, reduceSuccessFn, reduceErrorFn) {
@@ -32,6 +33,7 @@ class Reducer {
         reducerFn: reduceErrorFn,
       });
     /* eslint-enable no-unused-expressions */
+    return this;
   }
 
   build() {
