@@ -1,10 +1,11 @@
 module.exports = {
-  extends: 'airbnb-base',
-  plugins: ['import'],
+  extends: "airbnb-base",
+  plugins: ["import"],
   env: {
-    jest: true,
+    jest: true
   },
   rules: {
-    'no-underscore-dangle': 'off',
-  },
+    "no-underscore-dangle": "off",
+    "linebreak-style": 0
+  }
 };

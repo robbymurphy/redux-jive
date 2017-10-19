@@ -15,20 +15,23 @@ class Reducer {
   }
 
   reduceAsync(asyncActionFn, reduceBeforeFn, reduceSuccessFn, reduceErrorFn) {
-    this.reducers.push(
-      {
+    /* eslint-disable no-unused-expressions */
+    reduceBeforeFn &&
+      this.reducers.push({
         actionType: asyncActionFn.__jiveId,
         reducerFn: reduceBeforeFn,
-      },
-      {
+      });
+    reduceSuccessFn &&
+      this.reducers.push({
         actionType: `${asyncActionFn.__jiveId}_SUCCESS`,
         reducerFn: reduceSuccessFn,
-      },
-      {
+      });
+    reduceErrorFn &&
+      this.reducers.push({
         actionType: `${asyncActionFn.__jiveId}_ERROR`,
         reducerFn: reduceErrorFn,
-      },
-    );
+      });
+    /* eslint-enable no-unused-expressions */
   }
 
   build() {
@@ -37,7 +40,7 @@ class Reducer {
       let newState = state;
       for (let i = 0; i < reducers.length; i += 1) {
         const reducer = reducers[i];
-        if (reducer.reducerFn && action.type === reducer.actionType) {
+        if (action.type === reducer.actionType) {
           newState = reducer.reducerFn(newState, action.payload);
         } else if (state === undefined) {
           newState = defaultValue;

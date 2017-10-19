@@ -42,7 +42,7 @@ function wrapAction(obj, actionName) {
           type: actionId,
           payload: null,
         });
-        actionResult
+        return actionResult
           .then(data =>
             dispatch({
               type: `${actionId}_SUCCESS`,

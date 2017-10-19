@@ -12,6 +12,7 @@ class TestActions extends Actions {
   action3() {
     return 'test3';
   }
+  asyncAction() {}
 }
 
 const testActions = new TestActions();
@@ -22,6 +23,12 @@ class TestReducer extends Reducer {
 
     this.reduce(testActions.action1, this.handleAction1);
     this.reduce(testActions.action2, this.handleAction2);
+    this.reduceAsync(
+      testActions.asyncAction,
+      this.handleBeforeAsync,
+      this.handleAsyncSuccess,
+      this.handleAsyncFailure,
+    );
   }
 
   handleAction1(state, payload) {
@@ -29,6 +36,15 @@ class TestReducer extends Reducer {
   }
   handleAction2(state, payload) {
     return `${payload}_new2`;
+  }
+  handleBeforeAsync() {
+    this.beforeCalled = true;
+  }
+  handleAsyncSuccess(data) {
+    this.successData = data;
+  }
+  handleAsyncFailure(err) {
+    this.asyncError = err;
   }
 }
 /* eslint-enable class-methods-use-this, no-useless-constructor  */
@@ -43,7 +59,7 @@ describe('Reducer', () => {
     const testReducer = new TestReducer('test');
 
     // Assert
-    expect(testReducer.reducers.length).toEqual(2);
+    expect(testReducer.reducers.length).toEqual(5);
     expect(testReducer.reducers[0]).toEqual({
       actionType: 'TestActions.action1',
       reducerFn: testReducer.handleAction1,
@@ -51,6 +67,18 @@ describe('Reducer', () => {
     expect(testReducer.reducers[1]).toEqual({
       actionType: 'TestActions.action2',
       reducerFn: testReducer.handleAction2,
+    });
+    expect(testReducer.reducers[2]).toEqual({
+      actionType: 'TestActions.asyncAction',
+      reducerFn: testReducer.handleBeforeAsync,
+    });
+    expect(testReducer.reducers[3]).toEqual({
+      actionType: 'TestActions.asyncAction_SUCCESS',
+      reducerFn: testReducer.handleAsyncSuccess,
+    });
+    expect(testReducer.reducers[4]).toEqual({
+      actionType: 'TestActions.asyncAction_ERROR',
+      reducerFn: testReducer.handleAsyncFailure,
     });
   });
   describe('Built Reducer', () => {
