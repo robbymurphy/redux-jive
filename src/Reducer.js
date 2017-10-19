@@ -14,6 +14,26 @@ class Reducer {
     });
   }
 
+  reduceAsync(asyncActionFn, reduceBeforeFn, reduceSuccessFn, reduceErrorFn) {
+    /* eslint-disable no-unused-expressions */
+    reduceBeforeFn &&
+      this.reducers.push({
+        actionType: asyncActionFn.__jiveId,
+        reducerFn: reduceBeforeFn,
+      });
+    reduceSuccessFn &&
+      this.reducers.push({
+        actionType: `${asyncActionFn.__jiveId}_SUCCESS`,
+        reducerFn: reduceSuccessFn,
+      });
+    reduceErrorFn &&
+      this.reducers.push({
+        actionType: `${asyncActionFn.__jiveId}_ERROR`,
+        reducerFn: reduceErrorFn,
+      });
+    /* eslint-enable no-unused-expressions */
+  }
+
   build() {
     const { reducers, defaultValue } = this;
     return (state, action) => {
