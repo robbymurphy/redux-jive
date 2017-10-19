@@ -22,6 +22,11 @@ class TodoActions extends Actions {
   markDone(todo) {
     return todo;
   }
+
+  // functions that return promises will use the before/success/after reducer middleware
+  addAsync(todo) {
+    api.post('/todos', todo);
+  }
 }
 
 // actions are singletons
@@ -42,6 +47,8 @@ export class TodoReducer extends Reducer {
     // connect the actions with the reducer functions
     reduce(todoActions.add, this.handleAdd);
     reduce(todoActions.markDone, this.handleMarkDone);
+    // asynchronous actions
+    reduceAsync(todoActions.addAsync, this.handleBeforeAdd, this.handleAddSuccess, this.handleAddError);
   }
 
   // payload here is the todo that was added
@@ -51,6 +58,18 @@ export class TodoReducer extends Reducer {
 
   handleMarkDone(state, payload) {
     return state.map(todo => todo.id === payload.id ? {...todo, done: true} : todo);
+  }
+
+  handleBeforeAdd(state, payload) {
+    return state;
+  }
+
+  handleAddSuccess(state, payload) {
+    return [...state, payload];
+  }
+
+  handleAddError(state, error) {
+    return state;
   }
 }
 ```
@@ -76,4 +95,15 @@ const todoApp = combineReducers({
 });
 
 export default todoApp;
+```
+Remember to add the asyncMiddleware if you are doing asynchronous calls
+```javascript
+import { createStore, applyMiddleware } from 'redux';
+import asyncMiddleware from 'redux-jive';
+import rootReducer from './reducers/index';
+ 
+const store = createStore(
+  rootReducer,
+  applyMiddleware(asyncMiddleware)
+);
 ```
