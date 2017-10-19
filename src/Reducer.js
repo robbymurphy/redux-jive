@@ -14,13 +14,30 @@ class Reducer {
     });
   }
 
+  reduceAsync(asyncActionFn, reduceBeforeFn, reduceSuccessFn, reduceErrorFn) {
+    this.reducers.push(
+      {
+        actionType: asyncActionFn.__jiveId,
+        reducerFn: reduceBeforeFn,
+      },
+      {
+        actionType: `${asyncActionFn.__jiveId}_SUCCESS`,
+        reducerFn: reduceSuccessFn,
+      },
+      {
+        actionType: `${asyncActionFn.__jiveId}_ERROR`,
+        reducerFn: reduceErrorFn,
+      },
+    );
+  }
+
   build() {
     const { reducers, defaultValue } = this;
     return (state, action) => {
       let newState = state;
       for (let i = 0; i < reducers.length; i += 1) {
         const reducer = reducers[i];
-        if (action.type === reducer.actionType) {
+        if (reducer.reducerFn && action.type === reducer.actionType) {
           newState = reducer.reducerFn(newState, action.payload);
         } else if (state === undefined) {
           newState = defaultValue;

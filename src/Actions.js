@@ -25,15 +25,42 @@ function funcIsAction(functionName) {
   return true;
 }
 
+function isPromise(obj) {
+  return obj && typeof obj.then === 'function';
+}
+
 function wrapAction(obj, actionName) {
   const originalMethod = obj[actionName];
   const constructorName = Object.getPrototypeOf(obj).constructor.name;
   const actionId = `${constructorName}.${actionName}`;
 
-  const action = (...args) => ({
-    type: actionId,
-    payload: originalMethod.apply(obj, args),
-  });
+  const action = (...args) => {
+    const actionResult = originalMethod.apply(obj, args);
+    if (isPromise(actionResult)) {
+      return (dispatch) => {
+        dispatch({
+          type: actionId,
+          payload: null,
+        });
+        actionResult
+          .then(data =>
+            dispatch({
+              type: `${actionId}_SUCCESS`,
+              payload: data,
+            }))
+          .catch(err =>
+            dispatch({
+              type: `${actionId}_ERROR`,
+              payload: err,
+              error: true,
+            }));
+      };
+    }
+    return {
+      type: actionId,
+      payload: actionResult,
+    };
+  };
 
   action.__jiveId = actionId;
   // eslint-disable-next-line no-param-reassign
