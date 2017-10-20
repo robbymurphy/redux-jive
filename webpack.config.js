@@ -1,31 +1,36 @@
-const webpack = require('webpack');
-const CleanPlugin = require('clean-webpack-plugin');
-const path = require('path');
+var webpack = require('webpack');
 
-module.exports = {
-  entry: {
-    'redux-jive': path.resolve(__dirname, 'src/index.js'),
-    vendor: 'redux',
-  },
-  target: 'web',
-  output: {
-    path: `${__dirname}/dist`, // Note: Physical files are only output by the production build task `npm run build`.
-    filename: '[name].js',
-  },
-  plugins: [
-    new CleanPlugin(['dist']),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
-  ],
+var env = process.env.NODE_ENV;
+var config = {
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        include: path.join(__dirname, 'src'),
-        loaders: ['babel-loader', 'eslint-loader'],
-      },
-    ],
+      { test: /\.js$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /node_modules/ }
+    ]
   },
+  output: {
+    library: 'Redux',
+    libraryTarget: 'umd'
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env)
+    })
+  ]
 };
+
+if (env === 'production') {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true,
+        warnings: false
+      }
+    })
+  );
+}
+
+module.exports = config;

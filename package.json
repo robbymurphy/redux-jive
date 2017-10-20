@@ -1,22 +1,40 @@
 {
   "name": "redux-jive",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "helpers for redux wiring",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
   "scripts": {
-    "clean": "rimraf dist coverage",
-    "build:prod": "webpack --config webpack.prod.config.js",
-    "build:dev": "webpack --config webpack.config.js",
-    "build": "npm run clean && npm run build:prod && npm run test",
+    "clean": "rimraf dist coverage lib",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/redux-jive.js",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/redux-jive.min.js",
+    "build:all": "npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:es",
+    "build": "npm run clean && npm run build:all && npm run test",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "test": "jest --coverage",
-    "test:watch": "npm run build:dev && jest --watchAll"
+    "test": "jest src --coverage --collectCoverageFrom=**/src/**/*.js --collectCoverageFrom=!src/index.js",
+    "test:watch": "npm run build:dev && jest src --watchAll"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robbymurphy/redux-jive.git"
   },
-  "keywords": ["redux", "react", "flux"],
+  "keywords": [
+    "redux",
+    "reducer",
+    "actions",
+    "middleware",
+    "async",
+    "react",
+    "flux"
+  ],
   "author": "Robert Murphy",
   "license": "MIT",
   "bugs": {
@@ -27,12 +45,14 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "clean-webpack-plugin": "^0.1.17",
     "coveralls": "^3.0.0",
+    "cross-env": "^5.1.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-loader": "^1.9.0",
