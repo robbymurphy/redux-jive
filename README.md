@@ -1,9 +1,8 @@
 # redux-jive
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/robbymurphy/redux-jive.svg)](https://greenkeeper.io/)
 Helpers for redux wiring
 
-[![npm version](https://img.shields.io/npm/v/redux-jive.svg)](https://www.npmjs.com/package/redux-jive) [![Build Status](https://travis-ci.org/robbymurphy/redux-jive.svg?branch=master)](https://travis-ci.org/robbymurphy/redux-jive) [![Coverage Status](https://coveralls.io/repos/github/robbymurphy/redux-jive/badge.svg)](https://coveralls.io/github/robbymurphy/redux-jive) [![Dependency Status](https://david-dm.org/robbymurphy/redux-jive.svg)](https://david-dm.org/robbymurphy/redux-jive) [![devDependency Status](https://david-dm.org/robbymurphy/redux-jive/dev-status.svg)](https://david-dm.org/robbymurphy/redux-jive#info=devDependencies)
+[![npm version](https://img.shields.io/npm/v/redux-jive.svg)](https://www.npmjs.com/package/redux-jive) [![Build Status](https://travis-ci.org/robbymurphy/redux-jive.svg?branch=master)](https://travis-ci.org/robbymurphy/redux-jive) [![Coverage Status](https://coveralls.io/repos/github/robbymurphy/redux-jive/badge.svg)](https://coveralls.io/github/robbymurphy/redux-jive) [![Greenkeeper badge](https://badges.greenkeeper.io/robbymurphy/redux-jive.svg)](https://greenkeeper.io/)
 
 ## Goal
 The goal of this library is to remove the necessity for boilerplate code in redux projects.  Secondarily, the library aims to group actions and reducers and more tightly couple them.
