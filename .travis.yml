@@ -12,3 +12,4 @@ deploy:
   on:
     tags: true
     repo: robbymurphy/redux-jive
+  skip_cleanup: true
