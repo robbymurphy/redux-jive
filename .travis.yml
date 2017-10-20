@@ -1,6 +1,14 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 script:
-  - npm run build
+- npm run build
 after_success: npm run coveralls
+deploy:
+  provider: npm
+  email: robbymurphy@gmail.com
+  api_key:
+    secure: DtCuAMZZSIdS2Ts2ttHIdBekumUem0kkvcAnOJgQiGs3BfyGnXJ7yfKIOaw3AVbXPWz9xejEFR8/LjKHixDg2avjlQ8ghS6zzLV91uuc/4U7qdXHd9nvLYZRC45p8Rmi0qmP9jnsou9Opejz2GFEThdVDAfpOL/ud8KIizR2dcNcb02f7+B12SSYSPfy5ZyWmJt+tIvE24tZpmyIch6IiArZQyu0K7UbSUz/cIEhpRuzWxaoy0akVM/x73Vog6J21qeHMuyQ9L6r2nJLNXeSqd65dYOOqnaDRrN2++bWHLmF3By8HSwbbvZnc7eIqlr0FFcLn2UItbfzbi8JGhw88uHCFul/emU+3M3iHTnSJBKtqeSWYtIBT+gbIv86qgnw1pwbygU2b1OL9/GCZOCU+05S/LCgqbMn+/HzDBllVKNKdZAhKV1aUjXKRwFwRVmc0henP4YtPMKagB+lC5HbYcT227jCynlxLs8W8b7N+HaSYLuQIW/8Wf8DrJpY91walghtBJsP/ns7s9F5OwLXYh686bWs5HlWnVkmFBDCp37CbdsFCQZdOp/HBBEYjJIgbFZlpZ0Xk7jCpgdMCUX7CpNhvqTVUfE1V1TO1PzbK9DQgFbtecpglKp0vHpzXC01jVchtQBW3mpMujLYMq0TNn3Scp3kwp6Rdq6FH0E3ktI=
+  on:
+    tags: true
+    repo: robbymurphy/redux-jive
