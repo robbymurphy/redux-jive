@@ -99,7 +99,7 @@ export default todoApp;
 Remember to add the asyncMiddleware if you are doing asynchronous calls
 ```javascript
 import { createStore, applyMiddleware } from 'redux';
-import asyncMiddleware from 'redux-jive';
+import { asyncMiddleware } from 'redux-jive';
 import rootReducer from './reducers/index';
  
 const store = createStore(
