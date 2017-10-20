@@ -1,6 +1,6 @@
 {
   "name": "redux-jive",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "helpers for redux wiring",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
