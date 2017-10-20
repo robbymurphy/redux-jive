@@ -1,5 +1,4 @@
 # redux-jive
-
 Helpers for redux wiring
 
 [![npm version](https://img.shields.io/npm/v/redux-jive.svg)](https://www.npmjs.com/package/redux-jive) [![Build Status](https://travis-ci.org/robbymurphy/redux-jive.svg?branch=master)](https://travis-ci.org/robbymurphy/redux-jive) [![Coverage Status](https://coveralls.io/repos/github/robbymurphy/redux-jive/badge.svg)](https://coveralls.io/github/robbymurphy/redux-jive) [![Greenkeeper badge](https://badges.greenkeeper.io/robbymurphy/redux-jive.svg)](https://greenkeeper.io/)
