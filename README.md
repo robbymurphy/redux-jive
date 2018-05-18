@@ -25,7 +25,7 @@ class TodoActions extends Actions {
 
   // functions that return promises will use the before/success/after reducer middleware
   addAsync(todo) {
-    api.post('/todos', todo);
+    return api.post('/todos', todo);
   }
 }
 
